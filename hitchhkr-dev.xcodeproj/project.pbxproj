@@ -12,9 +12,12 @@
 		35FC876F1F43BB130010E880 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35FC876D1F43BB130010E880 /* Main.storyboard */; };
 		35FC87711F43BB130010E880 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35FC87701F43BB130010E880 /* Assets.xcassets */; };
 		35FC87741F43BB130010E880 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35FC87721F43BB130010E880 /* LaunchScreen.storyboard */; };
+		3D3D0CF4FF1911A4B56B97F2 /* Pods_hitchhkr_dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8A4720DCA817970D219A4EC /* Pods_hitchhkr_dev.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23E05CC430CA01EB43A5FD63 /* Pods-hitchhkr-dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hitchhkr-dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hitchhkr-dev/Pods-hitchhkr-dev.debug.xcconfig"; sourceTree = "<group>"; };
+		337AC31B20A9284D05D7FA22 /* Pods-hitchhkr-dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hitchhkr-dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-hitchhkr-dev/Pods-hitchhkr-dev.release.xcconfig"; sourceTree = "<group>"; };
 		35FC87661F43BB130010E880 /* hitchhkr-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hitchhkr-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35FC87691F43BB130010E880 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35FC876B1F43BB130010E880 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,7 @@
 		35FC87701F43BB130010E880 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35FC87731F43BB130010E880 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35FC87751F43BB130010E880 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8A4720DCA817970D219A4EC /* Pods_hitchhkr_dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hitchhkr_dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D3D0CF4FF1911A4B56B97F2 /* Pods_hitchhkr_dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				35FC87681F43BB130010E880 /* hitchhkr-dev */,
 				35FC87671F43BB130010E880 /* Products */,
+				54889FAE5F3E7E58B3A89BF8 /* Pods */,
+				525DDE0A221EF07888A7B9CB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = "hitchhkr-dev";
 			sourceTree = "<group>";
 		};
+		525DDE0A221EF07888A7B9CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A8A4720DCA817970D219A4EC /* Pods_hitchhkr_dev.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		54889FAE5F3E7E58B3A89BF8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				23E05CC430CA01EB43A5FD63 /* Pods-hitchhkr-dev.debug.xcconfig */,
+				337AC31B20A9284D05D7FA22 /* Pods-hitchhkr-dev.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 35FC87781F43BB130010E880 /* Build configuration list for PBXNativeTarget "hitchhkr-dev" */;
 			buildPhases = (
+				6D75D9D95F29119A4B16DD40 /* [CP] Check Pods Manifest.lock */,
 				35FC87621F43BB130010E880 /* Sources */,
 				35FC87631F43BB130010E880 /* Frameworks */,
 				35FC87641F43BB130010E880 /* Resources */,
+				4401042C552E6E209F0F7E94 /* [CP] Embed Pods Frameworks */,
+				3DACC8D6C7B943FFEAD5C142 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,6 +158,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3DACC8D6C7B943FFEAD5C142 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hitchhkr-dev/Pods-hitchhkr-dev-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4401042C552E6E209F0F7E94 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hitchhkr-dev/Pods-hitchhkr-dev-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D75D9D95F29119A4B16DD40 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		35FC87621F43BB130010E880 /* Sources */ = {
@@ -261,6 +336,7 @@
 		};
 		35FC87791F43BB130010E880 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23E05CC430CA01EB43A5FD63 /* Pods-hitchhkr-dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = X9S97S4N54;
@@ -274,6 +350,7 @@
 		};
 		35FC877A1F43BB130010E880 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 337AC31B20A9284D05D7FA22 /* Pods-hitchhkr-dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = X9S97S4N54;
