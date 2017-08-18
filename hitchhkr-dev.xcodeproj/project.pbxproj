@@ -50,6 +50,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		351884981F4676220058ADC1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		351884991F46764F0058ADC1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		3554E9051F43DDDD0023B6C9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,9 +111,11 @@
 		35FC87681F43BB130010E880 /* hitchhkr-dev */ = {
 			isa = PBXGroup;
 			children = (
+				351884981F4676220058ADC1 /* Services */,
 				3554E9071F43DDED0023B6C9 /* Model */,
 				3554E9061F43DDE70023B6C9 /* View */,
 				3554E9051F43DDDD0023B6C9 /* Controller */,
+				351884991F46764F0058ADC1 /* Utils */,
 				35FC87691F43BB130010E880 /* AppDelegate.swift */,
 				35FC876B1F43BB130010E880 /* ViewController.swift */,
 				35FC876D1F43BB130010E880 /* Main.storyboard */,
