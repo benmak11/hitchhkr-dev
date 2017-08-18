@@ -1,7 +1,7 @@
 # Hitchhkr-dev
 ## Uber clone
 
-This is an iOS app which uses [Firebase Auth](https://firebase.google.com/docs/auth/) and [Firebase](https://firebase.google.com/) as a backend to serve as an application to connect users to online drivers. This is an Uber clone for showcase purposes.
+This is an iOS app which uses [Firebase Auth](https://firebase.google.com/docs/auth/) and [Firebase](https://firebase.google.com/) as a backend to serve as for the application. This Uber clone is specifically for showcase purposes and is not intended for commercial use. The features added are basic to the Uber platform as of today.
 
 ## Current status of development
 
