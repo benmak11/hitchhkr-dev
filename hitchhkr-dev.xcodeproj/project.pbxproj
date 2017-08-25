@@ -15,6 +15,7 @@
 		355A70641F501236004FDC5B /* LeftSidePanelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355A70631F501236004FDC5B /* LeftSidePanelVC.swift */; };
 		355A70661F5012B6004FDC5B /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355A70651F5012B6004FDC5B /* ContainerVC.swift */; };
 		355A70691F501570004FDC5B /* CenterVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355A70681F501570004FDC5B /* CenterVCDelegate.swift */; };
+		355A706C1F5022A9004FDC5B /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355A706B1F5022A9004FDC5B /* UIViewExt.swift */; };
 		35FC876A1F43BB130010E880 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FC87691F43BB130010E880 /* AppDelegate.swift */; };
 		35FC876C1F43BB130010E880 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FC876B1F43BB130010E880 /* HomeVC.swift */; };
 		35FC876F1F43BB130010E880 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35FC876D1F43BB130010E880 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 		355A70631F501236004FDC5B /* LeftSidePanelVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSidePanelVC.swift; sourceTree = "<group>"; };
 		355A70651F5012B6004FDC5B /* ContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
 		355A70681F501570004FDC5B /* CenterVCDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterVCDelegate.swift; sourceTree = "<group>"; };
+		355A706B1F5022A9004FDC5B /* UIViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		35FC87661F43BB130010E880 /* hitchhkr-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hitchhkr-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35FC87691F43BB130010E880 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35FC876B1F43BB130010E880 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -107,6 +109,14 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
+		355A706A1F502265004FDC5B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				355A706B1F5022A9004FDC5B /* UIViewExt.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		35FC875D1F43BB130010E880 = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +138,7 @@
 		35FC87681F43BB130010E880 /* hitchhkr-dev */ = {
 			isa = PBXGroup;
 			children = (
+				355A706A1F502265004FDC5B /* Extensions */,
 				355A70671F501561004FDC5B /* Protocols */,
 				351884981F4676220058ADC1 /* Services */,
 				3554E9071F43DDED0023B6C9 /* Model */,
@@ -289,6 +300,7 @@
 				355A70641F501236004FDC5B /* LeftSidePanelVC.swift in Sources */,
 				3554E9111F43E4040023B6C9 /* CircleView.swift in Sources */,
 				355A70661F5012B6004FDC5B /* ContainerVC.swift in Sources */,
+				355A706C1F5022A9004FDC5B /* UIViewExt.swift in Sources */,
 				35FC876C1F43BB130010E880 /* HomeVC.swift in Sources */,
 				3554E90D1F43E1A90023B6C9 /* RoundImageView.swift in Sources */,
 				3554E90F1F43E2890023B6C9 /* RoundedShadowView.swift in Sources */,
