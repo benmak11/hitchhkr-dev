@@ -19,6 +19,7 @@
 		355A706E1F5029E0004FDC5B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355A706D1F5029E0004FDC5B /* LoginVC.swift */; };
 		355A70701F502C1F004FDC5B /* RoundedCornerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355A706F1F502C1F004FDC5B /* RoundedCornerTextField.swift */; };
 		3572ACE21F5642D400C055FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3572ACE11F5642D400C055FE /* GoogleService-Info.plist */; };
+		3572ACE41F56443600C055FE /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3572ACE31F56443600C055FE /* DataService.swift */; };
 		35FC876A1F43BB130010E880 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FC87691F43BB130010E880 /* AppDelegate.swift */; };
 		35FC876C1F43BB130010E880 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FC876B1F43BB130010E880 /* HomeVC.swift */; };
 		35FC876F1F43BB130010E880 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35FC876D1F43BB130010E880 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		355A706D1F5029E0004FDC5B /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		355A706F1F502C1F004FDC5B /* RoundedCornerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornerTextField.swift; sourceTree = "<group>"; };
 		3572ACE11F5642D400C055FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3572ACE31F56443600C055FE /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		35FC87661F43BB130010E880 /* hitchhkr-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hitchhkr-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35FC87691F43BB130010E880 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35FC876B1F43BB130010E880 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 		351884981F4676220058ADC1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3572ACE31F56443600C055FE /* DataService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				355A70691F501570004FDC5B /* CenterVCDelegate.swift in Sources */,
+				3572ACE41F56443600C055FE /* DataService.swift in Sources */,
 				3554E9131F43E5A90023B6C9 /* RoundedShadowButton.swift in Sources */,
 				355A706E1F5029E0004FDC5B /* LoginVC.swift in Sources */,
 				355A70641F501236004FDC5B /* LeftSidePanelVC.swift in Sources */,
