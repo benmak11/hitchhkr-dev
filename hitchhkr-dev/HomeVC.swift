@@ -292,5 +292,18 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         animateTableView(shouldShow: false)
         print("selected!")
     }
+    
+    /* 
+     *Allow the user to hide the TableView when they are done 
+     */
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if destinationTextField.text == "" {
+            animateTableView(shouldShow: false)
+        }
+    }
 }
 
