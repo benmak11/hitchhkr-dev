@@ -67,8 +67,13 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                                 print("An unexpected error occurred. Please try again")
                             }
                         }
-
                         
+//                        DB_BASE.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+//                            if snapshot.hasChild() {
+//                                print("User already exists")
+//                            }
+//                        })
+
                         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                             if error != nil {
                                 if let errorCode = FIRAuthErrorCode(rawValue: error!._code) {
@@ -91,7 +96,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                                         }
                                     }
                                 }
-                                print("Successfully created a new user with Firebase")
                                 self.dismiss(animated: true, completion: nil)
                             })
                     }

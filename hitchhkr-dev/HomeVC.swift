@@ -16,6 +16,7 @@ class HomeVC: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var actionBtn: RoundedShadowButton!
+    @IBOutlet weak var centerMapBtn: UIButton!
     
     var delegate: CenterVCDelegate?
     
@@ -49,6 +50,9 @@ class HomeVC: UIViewController {
         revealingSplashView.startAnimation()
         
         revealingSplashView.heartAttack = true
+        
+        DataService.instance.REF_DRIVERS.removeAllObservers()
+        DataService.instance.REF_USERS.removeAllObservers()
     }
     
     func checkLocationAuthStatus() {
@@ -113,6 +117,7 @@ class HomeVC: UIViewController {
     
     @IBAction func centerMapbtnWasPressed(_ sender: Any) {
         centerMapOnUserLocation()
+        centerMapBtn.fadeTo(alphaValue: 0, withDuration: 0.2)
     }
 
     @IBAction func actionBtnWasPressed(_ sender: Any) {
@@ -153,6 +158,10 @@ extension HomeVC: MKMapViewDelegate {
         }
         
         return nil
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        centerMapBtn.fadeTo(alphaValue: 1.0, withDuration: 0.2)
     }
 }
 
