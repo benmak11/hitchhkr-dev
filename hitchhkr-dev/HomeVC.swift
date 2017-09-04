@@ -24,6 +24,8 @@ class HomeVC: UIViewController {
     
     var manager: CLLocationManager?
     
+    var currentUserId = FIRAuth.auth()?.currentUser?.uid
+    
     var regionRadius: CLLocationDistance = 1000
     
     let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "launchScreenIcon")!, iconInitialSize: CGSize(width: 80, height: 80), backgroundColor: UIColor.white)
@@ -156,14 +158,21 @@ extension HomeVC: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // This sets up the look and feel of the driver annotation and the passenger annotation
         if let annotation = annotation as? DriverAnnotation {
             let identifier = "driver"
             var view: MKAnnotationView
             view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view.image = UIImage(named: "driverAnnotation")
             return view
+        } else if let annotation = annotation as? PassengerAnnotation {
+            let identifier = "passenger"
+            var view: MKAnnotationView
+            view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.image = UIImage(named: "currentLocationAnnotation")
+            return view
         }
-        
+    
         return nil
     }
     
@@ -289,12 +298,24 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let passengerCoordinate = manager?.location?.coordinate
+        
+        let passengerAnnotation = PassengerAnnotation(coordinate: passengerCoordinate!, key: currentUserId!)
+        mapView.addAnnotation(passengerAnnotation)
+        
+        destinationTextField.text = tableView.cellForRow(at: indexPath)?.textLabel?.text
+        
+        let selectedMapItem = matchingLocationItems[indexPath.row]
+        
+        DataService.instance.REF_USERS.child(currentUserId!).updateChildValues(["tripCoordinate": [selectedMapItem.placemark.coordinate.latitude, selectedMapItem.placemark.coordinate.longitude]])
+        
         animateTableView(shouldShow: false)
         print("selected!")
     }
     
     /* 
-     *Allow the user to hide the TableView when they are done 
+     * Allow the user to hide the TableView when they are done
      */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         view.endEditing(true)
