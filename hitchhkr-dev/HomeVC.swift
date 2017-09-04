@@ -200,7 +200,6 @@ extension HomeVC: MKMapViewDelegate {
         lineRenderer.lineWidth = 3
 //        lineRenderer.lineCap = .round
 //        lineRenderer.lineJoin = .miter
-        
         return lineRenderer
     }
     
@@ -221,6 +220,7 @@ extension HomeVC: MKMapViewDelegate {
                 for mapItem in response!.mapItems {
                     self.matchingLocationItems.append(mapItem as MKMapItem)
                     self.tableView.reloadData()
+                    self.shouldPresentLoadingView(false)
                 }
             }
         }
@@ -259,6 +259,8 @@ extension HomeVC: MKMapViewDelegate {
             self.route = response.routes[0]
             
             self.mapView.add(self.route.polyline)
+            
+            self.shouldPresentLoadingView(false)
         }
     }
 }
@@ -293,6 +295,7 @@ extension HomeVC: UITextFieldDelegate {
         if textField == destinationTextField {
             // Perform search
             performSearch()
+            shouldPresentLoadingView(true)
             view.endEditing(true)
         }
         
@@ -358,6 +361,8 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        shouldPresentLoadingView(true)
         
         let passengerCoordinate = manager?.location?.coordinate
         
