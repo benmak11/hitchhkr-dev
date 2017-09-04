@@ -34,6 +34,8 @@ class HomeVC: UIViewController {
     
     var matchingLocationItems: [MKMapItem] = [MKMapItem]()
     
+    var route: MKRoute!
+    
     var selectedItemPlacemark: MKPlacemark? = nil
     
     override func viewDidLoad() {
@@ -191,6 +193,17 @@ extension HomeVC: MKMapViewDelegate {
         centerMapBtn.fadeTo(alphaValue: 1.0, withDuration: 0.2)
     }
     
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        let lineRenderer = MKPolylineRenderer(overlay: self.route.polyline)
+        lineRenderer.strokeColor = UIColor(red: 216/255, green: 71/255, blue: 30/255, alpha: 0.75)
+        lineRenderer.lineWidth = 3
+//        lineRenderer.lineCap = .round
+//        lineRenderer.lineJoin = .miter
+        
+        return lineRenderer
+    }
+    
     func performSearch() {
         matchingLocationItems.removeAll()
         let request = MKLocalSearchRequest()
@@ -228,6 +241,25 @@ extension HomeVC: MKMapViewDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
         mapView.addAnnotation(annotation)
+    }
+    
+    func searchMapKitForResulsWithPolyLine(forMapItem mapItem: MKMapItem) {
+        let request = MKDirectionsRequest()
+        request.source = MKMapItem.forCurrentLocation()
+        request.destination = mapItem
+        request.transportType = MKDirectionsTransportType.automobile
+        
+        let directions = MKDirections(request: request)
+        
+        directions.calculate { (response, error) in
+            guard let response = response else {
+                print("\(error.debugDescription)")
+                return
+            }
+            self.route = response.routes[0]
+            
+            self.mapView.add(self.route.polyline)
+        }
     }
 }
 
@@ -339,6 +371,9 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         DataService.instance.REF_USERS.child(currentUserId!).updateChildValues(["tripCoordinate": [selectedMapItem.placemark.coordinate.latitude, selectedMapItem.placemark.coordinate.longitude]])
         
         dropPinFor(placemark: selectedMapItem.placemark)
+        
+        // Generates polyline to the destination
+        searchMapKitForResulsWithPolyLine(forMapItem: selectedMapItem)
         
         animateTableView(shouldShow: false)
         print("selected!")
