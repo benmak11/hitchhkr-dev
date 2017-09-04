@@ -1,0 +1,12 @@
+language: objective-c
+#podfile: Podfile
+#branches:
+#  only:
+#    - master
+xcode_workspace: hitchhkr-dev.xcworkspace
+xcode_scheme: hitchhkr-dev
+osx_image: xcode8.2
+# before_install:
+#   - xcrun simctl delete 25222345-97AE-4751-BF2A-76BF3EE270F7 # See https://github.com/travis-ci/travis-ci/issues/7031
+script:
+  - set -o pipefail && xcodebuild -workspace hitchhkr-dev.xcworkspace -scheme hitchhkr-dev -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.2' build | xcpretty
