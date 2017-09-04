@@ -48,7 +48,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                             if self.segmentedControl.selectedSegmentIndex == 0 {
                                 let userData = ["provider": user.providerID] as [String: Any]
                                 DataService.instance.createFirebaseDBUser(uid: user.uid, userData: userData, isDriver: false)
-                            } else {
+                            }
+                            if self.segmentedControl.selectedSegmentIndex == 1 {
                                 let userData = ["provider": user.providerID, "userIsDriver": true, "isPickupModeEnabled": false, "driverIsOnTrip": false] as [String: Any]
                                 DataService.instance.createFirebaseDBUser(uid: user.uid, userData: userData, isDriver: true)
                             }
@@ -66,21 +67,21 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                                 print("An unexpected error occurred. Please try again")
                             }
                         }
-
                         
+//                        DB_BASE.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+//                            if snapshot.hasChild() {
+//                                print("User already exists")
+//                            }
+//                        })
+
                         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                             if error != nil {
                                 if let errorCode = FIRAuthErrorCode(rawValue: error!._code) {
                                     switch errorCode {
-                                    case .errorCodeEmailAlreadyInUse:
-                                        print("That email is already in use. Please try again")
                                     case .errorCodeInvalidEmail:
                                         print("That is an invalid email. Please try again")
                                     default:
                                         print("An unexpected error occurred. Please try again")
-                                    }
-                                    if errorCode == FIRAuthErrorCode.errorCodeInvalidEmail {
-                                        print("That is an invalid email! Please try again")
                                     }
                                 }
                             } else {
@@ -88,13 +89,13 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                                         if self.segmentedControl.selectedSegmentIndex == 0 {
                                             let userData = ["provider": user.providerID] as [String: Any]
                                             DataService.instance.createFirebaseDBUser(uid: user.uid, userData: userData, isDriver: false)
-                                        } else {
+                                        }
+                                        if self.segmentedControl.selectedSegmentIndex == 1 {
                                             let userData = ["provider": user.providerID, "userIsDriver": true, "isPickupModeEnabled": false, "driverIsOnTrip": false] as [String: Any]
                                             DataService.instance.createFirebaseDBUser(uid: user.uid, userData: userData, isDriver: true)
                                         }
                                     }
                                 }
-                                print("Successfully created a new user with Firebase")
                                 self.dismiss(animated: true, completion: nil)
                             })
                     }

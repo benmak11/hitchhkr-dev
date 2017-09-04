@@ -43,5 +43,7 @@
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>HITCHHKR would like to use your location so you can get rides 🙂 So that our drivers can find you</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 </dict>
 </plist>
