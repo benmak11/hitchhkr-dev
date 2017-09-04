@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 import RevealingSplashView
 
-class HomeVC: UIViewController, MKMapViewDelegate {
+class HomeVC: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var actionBtn: RoundedShadowButton!
@@ -72,12 +72,21 @@ class HomeVC: UIViewController, MKMapViewDelegate {
 }
 
 extension HomeVC: CLLocationManagerDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthStatus()
         if status == .authorizedAlways {
             mapView.showsUserLocation = true
             mapView.userTrackingMode = .follow
         }
+    }
+}
+
+extension HomeVC: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        UpdateService.instance.updateUserLocation(withCoordinate: userLocation.coordinate)
+        UpdateService.instance.updateDriverLocation(withCoordinate: userLocation.coordinate)
     }
 }
 
