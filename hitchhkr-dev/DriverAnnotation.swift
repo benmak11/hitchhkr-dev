@@ -12,7 +12,8 @@ import MapKit
 
 class DriverAnnotation: NSObject, MKAnnotation {
     
-    var coordinate: CLLocationCoordinate2D
+    // This variable can be used with Obejective-C
+    dynamic var coordinate: CLLocationCoordinate2D
     var key: String
     
     init(coordinate: CLLocationCoordinate2D, withKey key: String) {

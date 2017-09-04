@@ -33,7 +33,7 @@ class LeftSidePanelVC: UIViewController {
         super.viewWillAppear(animated)
         
         pickupModeSwitch.isOn = false
-        pickupModeLbl.isHidden = true
+        pickupModeSwitch.isHidden = true
         pickupModeLbl.isHidden = true
         
         observePassengersAndDrivers()
@@ -66,7 +66,7 @@ class LeftSidePanelVC: UIViewController {
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshot {
                     if snap.key == FIRAuth.auth()?.currentUser?.uid {
-                        self.userAccountTypeLbl.text = "PASSENGER"
+                        self.userAccountTypeLbl.text = "DRIVER"
                         self.pickupModeSwitch.isHidden = false
                         
                         let switchStatus = snap.childSnapshot(forPath: "isPickupModeEnabled").value as! Bool
