@@ -39,4 +39,39 @@ class UpdateService {
             }
         })
     }
+    /**
+    *** Observing every trip to see if they are active
+    ***/
+    func observeTrips(handler: @escaping(_ coordinateDict: Dictionary<String, AnyObject>?) -> Void) {
+        DataService.instance.REF_TRIPS.observe(.value, with: { (snapshot) in
+            if let tripSnapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for trip in tripSnapshot {
+                    if trip.hasChild("passengerKey") && trip.hasChild("tripIsAccepted") {
+                        if let tripDict = trip.value as? Dictionary<String, AnyObject> {
+                            handler(tripDict)
+                        }
+                    }
+                }
+            }
+        })
+    }
+    
+    func updateTripsWithCoordinatesUponRequest() {
+        DataService.instance.REF_USERS.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let userSnapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for user in userSnapshot {
+                    if user.key == FIRAuth.auth()?.currentUser?.uid {
+                        if !user.hasChild("userIsDriver") {
+                            if let userDict = user.value as? Dictionary<String, AnyObject> {
+                                let pickArray = userDict["coordinate"] as! NSArray
+                                let destArray = userDict["tripCoordinate"] as! NSArray
+                                
+                                DataService.instance.REF_TRIPS.child(user.key).updateChildValues(["pickCoordinate": [pickArray[0], pickArray[1]], "destinationCoordinate": [destArray[0], destArray[1]], "passengerKey": user.key, "tripIsAccepted": false])
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
 }

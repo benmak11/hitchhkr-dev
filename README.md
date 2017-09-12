@@ -10,7 +10,7 @@ This is an iOS application that uses [Firebase Auth](https://firebase.google.com
 
 ## Current status of development
 
-This application is currently still under development but the code freeze date is set for `September 10th, 2017`.
+This application is currently still under development but the code freeze date is set for `September 20th, 2017`.
 
 ### Important notice
 

@@ -66,6 +66,27 @@ class HomeVC: UIViewController, Alertable {
         
         DataService.instance.REF_DRIVERS.removeAllObservers()
         DataService.instance.REF_USERS.removeAllObservers()
+        
+        UpdateService.instance.observeTrips { (tripDict) in
+            if let tripDict = tripDict {
+                let pickupCoordinate = tripDict["pickupCoordinateArray"] as! NSArray
+                let tripKey = tripDict["passengerKey"] as! String
+                let acceptanceStatus = tripDict["tripIsAccepted"] as! Bool
+                
+                if !acceptanceStatus {
+                    DataService.instance.driverIsAvailable(key: self.currentUserId!, handler: { (available) in
+                        if let available = available {
+                            if available {
+                                let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                                let pickupVC = storyboard.instantiateViewController(withIdentifier: "PickupVC") as? PickupVC
+                                pickupVC?.initData(coordinate: CLLocationCoordinate2D(latitude: pickupCoordinate[0] as! CLLocationDegrees, longitude: pickupCoordinate[1] as! CLLocationDegrees), passengerKey: tripKey)
+                                self.present(pickupVC!, animated: true, completion: nil)
+                            }
+                        }
+                    })
+                }
+            }
+        }
     }
     
     func checkLocationAuthStatus() {
@@ -147,7 +168,11 @@ class HomeVC: UIViewController, Alertable {
     }
 
     @IBAction func actionBtnWasPressed(_ sender: Any) {
+        UpdateService.instance.updateTripsWithCoordinatesUponRequest()
         actionBtn.animateButton(shouldLoad: true, withMessage: nil)
+        
+        self.view.endEditing(true)
+        destinationTextField.isUserInteractionEnabled = false
     }
     
     @IBAction func menuButtonWasPressed(_ sender: Any) {
