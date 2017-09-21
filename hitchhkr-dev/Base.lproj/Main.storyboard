@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-Bold</string>
+            <string>AvenirNext-DemiBold</string>
+            <string>AvenirNext-Heavy</string>
+            <string>AvenirNext-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--HomeVC-->
         <scene sceneID="tne-QT-ifu">
@@ -174,17 +182,32 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvm-dz-Q9K">
+                                <rect key="frame" x="141.5" y="531" width="92" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="5tX-SR-l79"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
+                                <state key="normal" title="Cancel Trip">
+                                    <color key="titleColor" red="0.84705882349999995" green="0.2784313725" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zCL-d0-0wo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Iv5-fQ-Gg4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="03J-2h-MIr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="iNP-GP-LLp" secondAttribute="trailing" id="3Qf-2k-xWW"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Iv5-fQ-Gg4" secondAttribute="bottom" id="7dl-Ak-wMo"/>
+                            <constraint firstItem="zvm-dz-Q9K" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Dzr-bW-kD1"/>
                             <constraint firstItem="0zM-tr-fCU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="Ncd-JQ-50E"/>
                             <constraint firstAttribute="trailing" secondItem="Iv5-fQ-Gg4" secondAttribute="trailing" id="Ppt-Zd-OBc"/>
                             <constraint firstItem="2iP-gm-Dbc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="Vyp-hS-N4w"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0zM-tr-fCU" secondAttribute="trailing" constant="20" id="aHT-TS-5Mv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2iP-gm-Dbc" secondAttribute="trailing" id="cD6-QT-xld"/>
+                            <constraint firstItem="eet-d2-DVx" firstAttribute="top" secondItem="zvm-dz-Q9K" secondAttribute="bottom" constant="19" id="hs7-S7-OIm"/>
                             <constraint firstAttribute="trailing" secondItem="eet-d2-DVx" secondAttribute="trailing" id="kCM-1T-81Y"/>
                             <constraint firstItem="2iP-gm-Dbc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="lsk-QW-rcx"/>
                             <constraint firstItem="eet-d2-DVx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mQI-YJ-br6"/>
@@ -196,6 +219,7 @@
                     </view>
                     <connections>
                         <outlet property="actionBtn" destination="JaL-TP-KzC" id="aOR-s9-WVP"/>
+                        <outlet property="cancelButton" destination="zvm-dz-Q9K" id="7vs-mA-Yyz"/>
                         <outlet property="centerMapBtn" destination="iNP-GP-LLp" id="Rcg-br-iHC"/>
                         <outlet property="destinationCircle" destination="JP2-4A-xaL" id="FUB-oS-kyP"/>
                         <outlet property="destinationTextField" destination="qmc-9t-lvU" id="zyd-oG-yLw"/>
@@ -412,7 +436,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up or login to start request rides with HITCHHKR: The Easiest way to get a lift anywhere!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34P-7c-Mej">
-                                                            <rect key="frame" x="1.5" y="57.5" width="347.5" height="85"/>
+                                                            <rect key="frame" x="155.5" y="57.5" width="0.0" height="85"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="85" id="7XH-JG-T3a"/>
                                                             </constraints>
