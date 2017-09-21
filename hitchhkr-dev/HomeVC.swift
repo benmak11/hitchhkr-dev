@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeVC.swift
 //  hitchhkr-dev
 //
 //  Created by Ben Makusha on 8/15/17.
@@ -47,6 +47,8 @@ class HomeVC: UIViewController, Alertable {
         manager?.desiredAccuracy = kCLLocationAccuracyBest
         
         checkLocationAuthStatus()
+        
+        cancelButton.isHidden = true
         
         mapView.delegate = self
         destinationTextField.delegate = self
@@ -99,27 +101,6 @@ class HomeVC: UIViewController, Alertable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        DataService.instance.driverIsAvailable(key: self.currentUserId!, handler: { (status) in
-            if status == false {
-                DataService.instance.REF_TRIPS.observeSingleEvent(of: .value, with: { (tripSnapshot) in
-                    if let tripSnapshot = tripSnapshot.children.allObjects as? [DataSnapshot] {
-                        for trip in tripSnapshot {
-                            if trip.childSnapshot(forPath: "driverKey").value as? String == self.currentUserId! {
-                                let pickUpCoordinateArray = trip.childSnapshot(forPath: "pickCoordinate").value as! NSArray
-                                let pickUpCoordinate = CLLocationCoordinate2D(latitude: pickUpCoordinateArray[0] as! CLLocationDegrees, longitude: pickUpCoordinateArray[1] as! CLLocationDegrees)
-                                let pickupPlacemark = MKPlacemark(coordinate: pickUpCoordinate)
-                                
-                                self.dropPinFor(placemark: pickupPlacemark)
-                                self.searchMapKitForResulsWithPolyLine(forOriginMapItem: nil, withDestinationMapItem: MKMapItem(placemark: pickupPlacemark))
-                            }
-                        }
-                    }
-                })
-            }
-        })
-        
-        connectUserAndDriverForTrip()
-        
         DataService.instance.REF_TRIPS.observe(.childRemoved, with: { (removedTripSnapshot) in
             let removeTripDict = removedTripSnapshot.value as? [String: AnyObject]
             if removeTripDict?["driverKey"] != nil {
@@ -143,45 +124,57 @@ class HomeVC: UIViewController, Alertable {
                 }
             })
         })
+        
+        DataService.instance.driverIsOnTrip(driverKey: self.currentUserId!, handler: { (isOnTrip, driverKey, tripKey) in
+            if isOnTrip == true {
+                DataService.instance.REF_TRIPS.observeSingleEvent(of: .value, with: { (tripSnapshot) in
+                    if let tripSnapshot = tripSnapshot.children.allObjects as? [DataSnapshot] {
+                        for trip in tripSnapshot {
+                            if trip.childSnapshot(forPath: "driverKey").value as? String == self.currentUserId! {
+                                let pickUpCoordinateArray = trip.childSnapshot(forPath: "pickCoordinate").value as! NSArray
+                                let pickUpCoordinate = CLLocationCoordinate2D(latitude: pickUpCoordinateArray[0] as! CLLocationDegrees, longitude: pickUpCoordinateArray[1] as! CLLocationDegrees)
+                                let pickupPlacemark = MKPlacemark(coordinate: pickUpCoordinate)
+                                
+                                self.dropPinFor(placemark: pickupPlacemark)
+                                self.searchMapKitForResulsWithPolyLine(forOriginMapItem: nil, withDestinationMapItem: MKMapItem(placemark: pickupPlacemark))
+                            }
+                        }
+                    }
+                })
+            }
+        })
+        connectUserAndDriverForTrip()
     }
     
     func connectUserAndDriverForTrip() {
-        DataService.instance.userIsDriver(userKey: currentUserId!, handler: { (status) in
-            if status == false {
-                DataService.instance.REF_TRIPS.child(self.currentUserId!).observe(.value, with: { (tripSnapshot) in
+        DataService.instance.passengerIsOnTrip(passengerKey: self.currentUserId!, handler: { (isOnTrip, driverKey, tripKey) in
+            if isOnTrip == true {
+                self.removeOverlaysAndAnnotations(forDrivers: false, forPassengers: true)
+                
+                DataService.instance.REF_TRIPS.child(tripKey!).observeSingleEvent(of: .value, with: { (tripSnapshot) in
                     let tripDict = tripSnapshot.value as? Dictionary<String, AnyObject>
+                    _ = tripDict?["driverKey"] as? String
                     
-                    if tripDict?["tripIsAccepted"] as? Bool == true {
-                        self.removeOverlaysAndAnnotations(forDrivers: false, forPassengers: true)
+                    let pickupCoordinateArray = tripDict?["pickupCoordinate"] as! NSArray
+                    let pickupCoordinate = CLLocationCoordinate2D(latitude: pickupCoordinateArray[0] as! CLLocationDegrees, longitude: pickupCoordinateArray[1] as! CLLocationDegrees)
+                    let pickupPlacemark = MKPlacemark(coordinate: pickupCoordinate)
+                    let pickupMapItem = MKMapItem(placemark: pickupPlacemark)
+                    
+                    DataService.instance.REF_DRIVERS.child(driverKey!).observeSingleEvent(of: .value, with: { (coordinateSnapshot) in
                         
-                        let driverId = tripDict?["driverKey"] as? String
+                        let coordinateSnapshot = coordinateSnapshot.value as! NSArray
+                        let driverCoordinate = CLLocationCoordinate2D(latitude: coordinateSnapshot[0] as! CLLocationDegrees, longitude: coordinateSnapshot[1] as! CLLocationDegrees)
+                        let driverPlacemark = MKPlacemark(coordinate: driverCoordinate)
+                        let driverMapItem = MKMapItem(placemark: driverPlacemark)
                         
-                        let pickupCoordinateArray = tripDict?["pickupCoordinate"] as! NSArray
-                        let pickupCoordinate = CLLocationCoordinate2D(latitude: pickupCoordinateArray[0] as! CLLocationDegrees, longitude: pickupCoordinateArray[1] as! CLLocationDegrees)
-                        let pickupPlacemark = MKPlacemark(coordinate: pickupCoordinate)
-                        let pickupMapItem = MKMapItem(placemark: pickupPlacemark)
+                        let passengerAnnotation = PassengerAnnotation(coordinate: pickupCoordinate, key: self.currentUserId!)
+                        self.mapView.addAnnotation(passengerAnnotation)
                         
-                        DataService.instance.REF_DRIVERS.observeSingleEvent(of: .value, with: { (driverSnapshot) in
-                            if let driverSnapshot = driverSnapshot.children.allObjects as? [DataSnapshot] {
-                                for driver in driverSnapshot {
-                                    if driver.key == driverId {
-                                        let driverCoordinateArray = driver.childSnapshot(forPath: "coordinate").value as! NSArray
-                                        let driverCoordinate = CLLocationCoordinate2D(latitude: driverCoordinateArray[0] as! CLLocationDegrees, longitude: driverCoordinateArray[1] as! CLLocationDegrees)
-                                        let driverPlacemark = MKPlacemark(coordinate: driverCoordinate)
-                                        let driverMapItem = MKMapItem(placemark: driverPlacemark)
-                                        
-                                        let passengerAnnotation = PassengerAnnotation(coordinate: pickupCoordinate, key: self.currentUserId!)
-                                        //let driverAnnotation = DriverAnnotation(coordinate: driverCoordinate, withKey: driverId!)
-                                        
-                                        self.mapView.addAnnotation(passengerAnnotation)
-                                        self.searchMapKitForResulsWithPolyLine(forOriginMapItem: driverMapItem, withDestinationMapItem: pickupMapItem)
-                                        self.actionBtn.animateButton(shouldLoad: false, withMessage: "DRIVER COMING")
-                                        self.actionBtn.isUserInteractionEnabled = false
-                                    }
-                                }
-                            }
-                        })
-                    }
+                        self.searchMapKitForResulsWithPolyLine(forOriginMapItem: driverMapItem, withDestinationMapItem: pickupMapItem)
+                        self.actionBtn.animateButton(shouldLoad: false, withMessage: "DRIVER COMING")
+                        self.actionBtn.isUserInteractionEnabled = false
+                       
+                    })
                 })
             }
         })
@@ -377,9 +370,6 @@ extension HomeVC: MKMapViewDelegate {
         
         shouldPresentLoadingView(false)
         
-        // Zoom feature to position to the destination and leaving point
-        zoom(toFitAnnotationsFromMapView: self.mapView, forActiveTripWithDriver: false, withKey: nil)
-        
         return lineRenderer
     }
     
@@ -449,6 +439,9 @@ extension HomeVC: MKMapViewDelegate {
             if self.mapView.overlays.count == 0 {
                 self.mapView.add(self.route.polyline)
             }
+            
+            // Zoom feature to position to the destination and leaving point
+            self.zoom(toFitAnnotationsFromMapView: self.mapView, forActiveTripWithDriver: false, withKey: nil)
             
             let delegate = AppDelegate.getAppDelegate()
             delegate.window?.rootViewController?.shouldPresentLoadingView(false)
@@ -649,6 +642,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         searchMapKitForResulsWithPolyLine(forOriginMapItem: nil, withDestinationMapItem: selectedMapItem)
         
         animateTableView(shouldShow: false)
+        cancelButton.isHidden = false
         print("selected!")
     }
     
