@@ -1,8 +1,8 @@
 language: objective-c
 #podfile: Podfile
-#branches:
-#  only:
-#    - master
+branches:
+ only:
+   - latest
 xcode_workspace: hitchhkr-dev.xcworkspace
 xcode_scheme: hitchhkr-dev
 osx_image: xcode8.2
