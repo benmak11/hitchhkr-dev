@@ -13,7 +13,7 @@ class LeftSidePanelVC: UIViewController {
     
     let appDelegate = AppDelegate.getAppDelegate()
     
-    let currentUserID = FIRAuth.auth()?.currentUser?.uid
+    let currentUserID = Auth.auth().currentUser?.uid
     
     @IBOutlet weak var userEmailLbl: UILabel!
     @IBOutlet weak var userAccountTypeLbl: UILabel!
@@ -38,13 +38,13 @@ class LeftSidePanelVC: UIViewController {
         
         observePassengersAndDrivers()
         
-        if FIRAuth.auth()?.currentUser == nil {
+        if Auth.auth().currentUser == nil {
             userEmailLbl.text = ""
             userAccountTypeLbl.text = ""
             userImageView.isHidden = true
             loginOutBtn.setTitle("Sign up / Login", for: .normal)
         } else {
-            userEmailLbl.text = FIRAuth.auth()?.currentUser?.email
+            userEmailLbl.text = Auth.auth().currentUser?.email
             userAccountTypeLbl.text = ""
             userImageView.isHidden = false
             loginOutBtn.setTitle("Logout", for: .normal)
@@ -53,9 +53,9 @@ class LeftSidePanelVC: UIViewController {
     
     func observePassengersAndDrivers() {
         DataService.instance.REF_USERS.observeSingleEvent(of: .value, with: { (snapshot) in
-            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {
-                    if snap.key == FIRAuth.auth()?.currentUser?.uid {
+                    if snap.key == Auth.auth().currentUser?.uid {
                         self.userAccountTypeLbl.text = "PASSENGER"
                     }
                 }
@@ -63,9 +63,9 @@ class LeftSidePanelVC: UIViewController {
         })
         
         DataService.instance.REF_DRIVERS.observeSingleEvent(of: .value, with: { (snapshot) in
-            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {
-                    if snap.key == FIRAuth.auth()?.currentUser?.uid {
+                    if snap.key == Auth.auth().currentUser?.uid {
                         self.userAccountTypeLbl.text = "DRIVER"
                         self.pickupModeSwitch.isHidden = false
                         
@@ -92,13 +92,13 @@ class LeftSidePanelVC: UIViewController {
 
     @IBAction func signUpLoginButtonWasPressed(_ sender: Any) {
         
-        if FIRAuth.auth()?.currentUser == nil {
+        if Auth.auth().currentUser == nil {
             let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
             let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
             present(loginVC!, animated: true, completion: nil)
         } else {
             do {
-                try FIRAuth.auth()?.signOut()
+                try Auth.auth().signOut()
                 userEmailLbl.text = ""
                 userAccountTypeLbl.text = ""
                 userImageView.isHidden = true

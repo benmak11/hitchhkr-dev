@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-let DB_BASE = FIRDatabase.database().reference()
+let DB_BASE = Database.database().reference()
 
 class DataService {
     static let instance = DataService()
@@ -19,19 +19,19 @@ class DataService {
     private var _REF_DRIVERS = DB_BASE.child("drivers")
     private var _REF_TRIPS = DB_BASE.child("trips")
     
-    var REF_BASE: FIRDatabaseReference {
+    var REF_BASE: DatabaseReference {
         return _REF_BASE
     }
     
-    var REF_USERS: FIRDatabaseReference {
+    var REF_USERS: DatabaseReference {
         return _REF_USERS
     }
     
-    var REF_DRIVERS: FIRDatabaseReference {
+    var REF_DRIVERS: DatabaseReference {
         return _REF_DRIVERS
     }
     
-    var REF_TRIPS: FIRDatabaseReference {
+    var REF_TRIPS: DatabaseReference {
         return _REF_TRIPS
     }
     
@@ -46,7 +46,7 @@ class DataService {
     
     func driverIsAvailable(key: String, handler: @escaping (_ status: Bool?) -> Void) {
         DataService.instance.REF_DRIVERS.observeSingleEvent(of: .value, with: { (snapshot) in
-            if let driverSnapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let driverSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for driver in driverSnapshot {
                     if driver.key == key {
                         if (driver.childSnapshot(forPath: "isPickupModeEnabled").value as? Bool)! {

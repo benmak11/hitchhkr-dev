@@ -24,7 +24,7 @@ class HomeVC: UIViewController, Alertable {
     
     var manager: CLLocationManager?
     
-    var currentUserId = FIRAuth.auth()?.currentUser?.uid
+    var currentUserId = Auth.auth().currentUser?.uid
     
     var regionRadius: CLLocationDistance = 1000
     
@@ -69,7 +69,7 @@ class HomeVC: UIViewController, Alertable {
         
         UpdateService.instance.observeTrips { (tripDict) in
             if let tripDict = tripDict {
-                let pickupCoordinate = tripDict["pickupCoordinateArray"] as! NSArray
+                let pickupCoordinate = tripDict["pickCoordinate"] as! NSArray
                 let tripKey = tripDict["passengerKey"] as! String
                 let acceptanceStatus = tripDict["tripIsAccepted"] as! Bool
                 
@@ -99,7 +99,7 @@ class HomeVC: UIViewController, Alertable {
     
     func loadDriverAnnotationsFromFB() {
         DataService.instance.REF_DRIVERS.observeSingleEvent(of: .value, with: { (snapshot) in
-            if let driverSnapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let driverSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for driver in driverSnapshot {
                     if driver.hasChild("userIsDriver") {
                         if driver.hasChild("coordinate") {
@@ -151,7 +151,7 @@ class HomeVC: UIViewController, Alertable {
     
     @IBAction func centerMapbtnWasPressed(_ sender: Any) {
         DataService.instance.REF_USERS.observeSingleEvent(of: .value, with: { (snapshot) in
-            if let userSnapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let userSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for user in userSnapshot {
                     if user.key == self.currentUserId! {
                         if user.hasChild("tripCoordinate") {
