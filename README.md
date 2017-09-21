@@ -10,8 +10,10 @@ This is an iOS application that uses [Firebase Auth](https://firebase.google.com
 
 ## Current status of development
 
-This application is currently still under development but the code freeze date is set for `September 20th, 2017`.
+**N/A**
 
 ### Important notice
 
-The *master* `branch` will serve as the release cycle branch but all other branches of development will be hidden.
+The *latest* `branch` will serve as the release cycle branch but all other branches of development will be hidden.
+
+Application is complete - please download and take a look 😃
