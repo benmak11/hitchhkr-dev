@@ -49,7 +49,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
-  - RevealingSplashView (= 0.2.0)
+  - RevealingSplashView
 
 SPEC CHECKSUMS:
   Firebase: 052c0de688fc87b414996eea13e223dd9fee3fa2
@@ -64,6 +64,6 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   RevealingSplashView: a19962358db66188841c73afd51eb663a29f75cd
 
-PODFILE CHECKSUM: b505a1fad91fa504f13434745e99c1a80c07dc94
+PODFILE CHECKSUM: ad14afd0909b1ff5ddcd7443237d38f9effecf6d
 
 COCOAPODS: 1.2.1

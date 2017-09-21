@@ -8,6 +8,6 @@ target 'hitchhkr-dev' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
-  pod 'RevealingSplashView', '0.2.0'
+  pod 'RevealingSplashView'
 
 end

@@ -89,6 +89,29 @@ class HomeVC: UIViewController, Alertable {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        DataService.instance.driverIsAvailable(key: self.currentUserId!, handler: { (status) in
+            if status == false {
+                DataService.instance.REF_TRIPS.observeSingleEvent(of: .value, with: { (tripSnapshot) in
+                    if let tripSnapshot = tripSnapshot.children.allObjects as? [DataSnapshot] {
+                        for trip in tripSnapshot {
+                            if trip.childSnapshot(forPath: "driverKey").value as? String == self.currentUserId! {
+                                let pickUpCoordinateArray = trip.childSnapshot(forPath: "pickCoordinate").value as! NSArray
+                                let pickUpCoordinate = CLLocationCoordinate2D(latitude: pickUpCoordinateArray[0] as! CLLocationDegrees, longitude: pickUpCoordinateArray[1] as! CLLocationDegrees)
+                                let pickupPlacemark = MKPlacemark(coordinate: pickUpCoordinate)
+                                
+                                self.dropPinFor(placemark: pickupPlacemark)
+                                self.searchMapKitForResulsWithPolyLine(forMapItem: MKMapItem(placemark: pickupPlacemark))
+                            }
+                        }
+                    }
+                })
+            }
+        })
+    }
+    
     func checkLocationAuthStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedAlways {
             manager?.startUpdatingLocation()
@@ -239,6 +262,8 @@ extension HomeVC: MKMapViewDelegate {
         //lineRenderer.lineCap = .round
         //lineRenderer.lineJoin = .miter
         
+        shouldPresentLoadingView(false)
+        
         // Zoom feature to position to the destination and leaving point
         zoom(toFitAnnotationsFromMapView: self.mapView)
         
@@ -304,7 +329,8 @@ extension HomeVC: MKMapViewDelegate {
             
             self.mapView.add(self.route.polyline)
             
-            self.shouldPresentLoadingView(false)
+            let delegate = AppDelegate.getAppDelegate()
+            delegate.window?.rootViewController?.shouldPresentLoadingView(false)
         }
     }
     
