@@ -1,49 +1,73 @@
 PODS:
-  - Firebase/Auth (4.1.1):
-    - Firebase/Core
-    - FirebaseAuth (= 4.1.1)
-  - Firebase/Core (4.1.1):
-    - FirebaseAnalytics (= 4.0.3)
-    - FirebaseCore (= 4.0.6)
-  - Firebase/Database (4.1.1):
-    - Firebase/Core
-    - FirebaseDatabase (= 4.0.2)
-  - FirebaseAnalytics (4.0.3):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - Firebase/Auth (5.20.2):
+    - Firebase/CoreOnly
+    - FirebaseAuth (= 5.4.2)
+  - Firebase/Core (5.20.2):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.8.1)
+  - Firebase/CoreOnly (5.20.2):
+    - FirebaseCore (= 5.4.1)
+  - Firebase/Database (5.20.2):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (= 5.1.1)
+  - FirebaseAnalytics (5.8.1):
+    - FirebaseCore (~> 5.4)
+    - FirebaseInstanceID (~> 3.8)
+    - GoogleAppMeasurement (= 5.8.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
-  - FirebaseAuth (4.1.1):
-    - FirebaseAnalytics (~> 4.0)
-    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+  - FirebaseAuth (5.4.2):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - GoogleUtilities/Environment (~> 5.2)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.6):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-    - nanopb (~> 0.3)
-  - FirebaseDatabase (4.0.2):
-    - FirebaseAnalytics (~> 4.0)
-    - FirebaseCore (~> 4.0)
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (5.4.1):
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseDatabase (5.1.1):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
     - leveldb-library (~> 1.18)
-  - FirebaseInstanceID (2.0.2):
-    - FirebaseCore (~> 4.0)
-  - GoogleToolboxForMac/DebugUtils (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/Defines (2.1.1)
-  - GoogleToolboxForMac/NSData+zlib (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
-    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
-  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
-  - GTMSessionFetcher/Core (1.1.11)
-  - leveldb-library (1.18.3)
-  - nanopb (0.3.8):
-    - nanopb/decode (= 0.3.8)
-    - nanopb/encode (= 0.3.8)
-  - nanopb/decode (0.3.8)
-  - nanopb/encode (0.3.8)
-  - RevealingSplashView (0.2.0)
+  - FirebaseInstanceID (3.8.1):
+    - FirebaseCore (~> 5.2)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/UserDefaults (~> 5.2)
+  - GoogleAppMeasurement (5.8.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - GoogleUtilities/AppDelegateSwizzler (5.7.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.7.0)
+  - GoogleUtilities/Logger (5.7.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.7.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.7.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.7.0)"
+  - GoogleUtilities/Reachability (5.7.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (5.7.0):
+    - GoogleUtilities/Logger
+  - GTMSessionFetcher/Core (1.2.1)
+  - leveldb-library (1.20)
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
+  - RevealingSplashView (0.6.0)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -51,19 +75,37 @@ DEPENDENCIES:
   - Firebase/Database
   - RevealingSplashView
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAuth
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseDatabase
+    - FirebaseInstanceID
+    - GoogleAppMeasurement
+    - GoogleUtilities
+    - GTMSessionFetcher
+    - leveldb-library
+    - nanopb
+    - RevealingSplashView
+
 SPEC CHECKSUMS:
-  Firebase: 052c0de688fc87b414996eea13e223dd9fee3fa2
-  FirebaseAnalytics: 76f754d37ca5b04f36856729b6af3ca0152d1069
-  FirebaseAuth: f8b07aa83de60d606b4eadd81484b3ac2097ea3e
-  FirebaseCore: 28def3c643989c97ea5a69ea5000f5fa9902b9fd
-  FirebaseDatabase: 4d1a10639a42cae26e094296951b53c689e5e191
-  FirebaseInstanceID: c4c7fca62c7b7330caee5da04f19a37ea37bb1c1
-  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
-  leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
-  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  RevealingSplashView: a19962358db66188841c73afd51eb663a29f75cd
+  Firebase: 0c8cf33f266410c61ab3e2265cfa412200351d9c
+  FirebaseAnalytics: ece1aa57a4f43c64d53a648b5a5e05151aae947b
+  FirebaseAuth: dd7bbf03a5aee0eafb3a1aee4d2812bd74bac890
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: f1a9a8be1aee4bf71a2fc0f4096df6788bdfda61
+  FirebaseDatabase: 2c15b0ea6f2c6eb5e57413f9d6340f1e50b81ae3
+  FirebaseInstanceID: a122b0c258720cf250551bb2bedf48c699f80d90
+  GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
+  GoogleUtilities: 273e67030e0de313e7304f6dcfa96fc5214f6c23
+  GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
 
 PODFILE CHECKSUM: ad14afd0909b1ff5ddcd7443237d38f9effecf6d
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.6.1
